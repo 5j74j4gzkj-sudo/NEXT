@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NEXT</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+  background: #f5f7fb;
+  color: #171717;
+}
+
+.app {
+  max-width: 600px;
+  margin: auto;
+  min-height: 100vh;
+  padding-bottom: 90px;
+}
+
+header {
+  padding: 35px 22px 20px;
+}
+
+.logo {
+  font-size: 34px;
+  font-weight: 800;
+}
+
+.subtitle {
+  color: #777;
+  margin-top: 4px;
+}
+
+.card {
+  background: white;
+  margin: 12px 18px;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.05);
+}
+
+.level {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.level-number {
+  font-size: 32px;
+  font-weight: 800;
+}
+
+.exp {
+  color: #777;
+}
+
+.progress {
+  height: 10px;
+  background: #e8e8e8;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 14px;
+}
+
+.progress-bar {
+  height: 100%;
+  width: 65%;
+  background: #111;
+  border-radius: 10px;
+}
+
+h2 {
+  font-size: 20px;
+  margin-top: 0;
+}
+
+.goal {
+  margin-top: 15px;
+}
+
+.goal-name {
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.goal-percent {
+  color: #777;
+  margin-top: 5px;
+}
+
+.task {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.task:last-child {
+  border-bottom: none;
+}
+
+.task input {
+  width: 22px;
+  height: 22px;
+}
+
+.task.done span {
+  text-decoration: line-through;
+  color: #999;
+}
+
+button {
+  border: none;
+  border-radius: 12px;
+  padding: 12px 18px;
+  font-size: 15px;
+  font-weight: 600;
+  background: #111;
+  color: white;
+  cursor: pointer;
+}
+
+.add {
+  width: 100%;
+  margin-top: 15px;
+}
+
+nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 75px;
+  background: rgba(255,255,255,0.95);
+  border-top: 1px solid #ddd;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+nav button {
+  background: none;
+  color: #777;
+  font-size: 13px;
+  padding: 8px;
+}
+
+nav button.active {
+  color: #111;
+  font-weight: 800;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 13px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  font-size: 16px;
+}
+
+.hidden {
+  display: none;
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<header>
+  <div class="logo">NEXT</div>
+  <div class="subtitle">昨日の自分を、今日超える。</div>
+</header>
+
+<main id="home">
+
+<div class="card">
+  <div class="level">
+    <div>
+      <div class="exp">CURRENT LEVEL</div>
+      <div class="level-number">LEVEL 1</div>
+    </div>
+
+    <div class="exp">
+      <span id="exp">0</span> EXP
+    </div>
+  </div>
+
+  <div class="progress">
+    <div class="progress-bar" id="levelProgress"></div>
+  </div>
+</div>
+
+<div class="card">
+  <h2>🎯 今日の進捗</h2>
+
+  <div class="progress">
+    <div class="progress-bar" id="dayProgress"></div>
+  </div>
+
+  <p id="progressText">0 / 3 完了</p>
+</div>
+
+<div class="card">
+  <h2>🔥 今日やること</h2>
+
+  <div id="tasks">
+
+    <label class="task">
+      <input type="checkbox" onchange="completeTask(this)">
+      <span>バドミントンを練習する</span>
+    </label>
+
+    <label class="task">
+      <input type="checkbox" onchange="completeTask(this)">
+      <span>勉強を30分する</span>
+    </label>
+
+    <label class="task">
+      <input type="checkbox" onchange="completeTask(this)">
+      <span>AI開発を30分する</span>
+    </label>
+
+  </div>
+
+  <button class="add" onclick="addTask()">
+    ＋ タスクを追加
+  </button>
+</div>
+
+<div class="card">
+  <h2>🏆 目標</h2>
+
+  <div class="goal">
+    <div class="goal-name">京都TOP16</div>
+
+    <div class="goal-percent">
+      現在の進捗 62%
+    </div>
+
+    <div class="progress">
+      <div class="progress-bar" style="width:62%"></div>
+    </div>
+  </div>
+
+</div>
+
+</main>
+
+<nav>
+
+<button class="active" onclick="showHome()">
+🏠<br>ホーム
+</button>
+
+<button onclick="showGoals()">
+🎯<br>目標
+</button>
+
+<button onclick="showTasks()">
+✓<br>タスク
+</button>
+
+<button onclick="showReview()">
+📝<br>振り返り
+</button>
+
+</nav>
+
+</div>
+
+<script>
+
+let exp = 0;
+let completed = 0;
+
+function completeTask(checkbox) {
+
+  const task = checkbox.parentElement;
+
+  if (checkbox.checked) {
+    task.classList.add("done");
+    exp += 30;
+    completed++;
+  } else {
+    task.classList.remove("done");
+    exp -= 30;
+    completed--;
+  }
+
+  document.getElementById("exp").textContent = exp;
+
+  const progress = completed / 3 * 100;
+
+  document.getElementById("dayProgress").style.width =
+    progress + "%";
+
+  document.getElementById("progressText").textContent =
+    completed + " / 3 完了";
+}
+
+function addTask() {
+
+  const name = prompt("追加するタスクを入力してください");
+
+  if (!name) return;
+
+  const tasks = document.getElementById("tasks");
+
+  const label = document.createElement("label");
+
+  label.className = "task";
+
+  label.innerHTML = `
+    <input type="checkbox" onchange="completeTask(this)">
+    <span>${name}</span>
+  `;
+
+  tasks.appendChild(label);
+}
+
+function showHome() {
+  alert("ホーム");
+}
+
+function showGoals() {
+  alert("目標機能は次のアップデートで追加します！");
+}
+
+function showTasks() {
+  alert("タスク一覧機能は次のアップデートで追加します！");
+}
+
+function showReview() {
+  alert("振り返り機能は次のアップデートで追加します！");
+}
+
+</script>
+
+</body>
+</html>
