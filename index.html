@@ -6,203 +6,193 @@
 <title>NEXT</title>
 
 <style>
-* {
-  box-sizing: border-box;
+*{box-sizing:border-box}
+
+body{
+margin:0;
+font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Helvetica Neue",sans-serif;
+background:#f5f7fb;
+color:#171717;
 }
 
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
-  background: #f5f7fb;
-  color: #171717;
+.app{
+max-width:650px;
+margin:auto;
+min-height:100vh;
+padding-bottom:100px;
 }
 
-.app {
-  max-width: 600px;
-  margin: auto;
-  min-height: 100vh;
-  padding-bottom: 100px;
+header{
+padding:35px 22px 20px;
 }
 
-header {
-  padding: 35px 22px 20px;
+.logo{
+font-size:36px;
+font-weight:800;
+letter-spacing:-1px;
 }
 
-.logo {
-  font-size: 34px;
-  font-weight: 800;
+.subtitle{
+color:#777;
+margin-top:4px;
 }
 
-.subtitle {
-  color: #777;
-  margin-top: 4px;
+.card{
+background:white;
+margin:12px 18px;
+padding:20px;
+border-radius:20px;
+box-shadow:0 4px 18px rgba(0,0,0,.05);
 }
 
-.card {
-  background: white;
-  margin: 12px 18px;
-  padding: 20px;
-  border-radius: 20px;
-  box-shadow: 0 4px 18px rgba(0,0,0,0.05);
+h2{
+font-size:20px;
+margin-top:0;
 }
 
-.level {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+input,select{
+width:100%;
+padding:13px;
+border:1px solid #ddd;
+border-radius:12px;
+font-size:16px;
+margin:7px 0 12px;
 }
 
-.level-number {
-  font-size: 32px;
-  font-weight: 800;
+button{
+border:0;
+border-radius:12px;
+padding:12px 18px;
+font-size:15px;
+font-weight:600;
+background:#111;
+color:white;
+cursor:pointer;
 }
 
-.exp {
-  color: #777;
+.full{
+width:100%;
+margin-top:8px;
 }
 
-.progress {
-  height: 10px;
-  background: #e8e8e8;
-  border-radius: 10px;
-  overflow: hidden;
-  margin-top: 14px;
+.secondary{
+background:#eee;
+color:#333;
 }
 
-.progress-bar {
-  height: 100%;
-  width: 0%;
-  background: #111;
-  border-radius: 10px;
-  transition: width 0.3s;
+.danger{
+background:#eee;
+color:#777;
+font-size:13px;
+padding:8px 12px;
 }
 
-h2 {
-  font-size: 20px;
-  margin-top: 0;
+.progress{
+height:10px;
+background:#e8e8e8;
+border-radius:10px;
+overflow:hidden;
+margin-top:10px;
 }
 
-.goal {
-  padding: 15px 0;
-  border-bottom: 1px solid #eee;
+.progress-bar{
+height:100%;
+background:#111;
+border-radius:10px;
+transition:.3s;
 }
 
-.goal:last-child {
-  border-bottom: none;
+.goal{
+padding:16px 0;
+border-bottom:1px solid #eee;
 }
 
-.goal-name {
-  font-weight: 700;
-  font-size: 18px;
+.goal:last-child{
+border-bottom:none;
 }
 
-.goal-date {
-  color: #777;
-  font-size: 14px;
-  margin-top: 4px;
+.goal-title{
+font-size:19px;
+font-weight:750;
 }
 
-.goal-percent {
-  margin-top: 8px;
-  font-size: 14px;
-  color: #777;
+.goal-date{
+font-size:13px;
+color:#888;
+margin-top:4px;
 }
 
-.delete {
-  margin-top: 10px;
-  background: #eee;
-  color: #555;
-  padding: 8px 12px;
-  font-size: 13px;
+.goal-progress{
+font-size:13px;
+color:#777;
+margin-top:8px;
 }
 
-.task {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 13px 0;
-  border-bottom: 1px solid #eee;
+.child{
+margin:12px 0 0 14px;
+padding:14px;
+border-left:3px solid #ddd;
+background:#fafafa;
+border-radius:10px;
 }
 
-.task input {
-  width: 22px;
-  height: 22px;
+.child-title{
+font-weight:700;
 }
 
-.task.done span {
-  text-decoration: line-through;
-  color: #999;
+.page{
+display:none;
 }
 
-button {
-  border: none;
-  border-radius: 12px;
-  padding: 12px 18px;
-  font-size: 15px;
-  font-weight: 600;
-  background: #111;
-  color: white;
+.page.active{
+display:block;
 }
 
-.add {
-  width: 100%;
-  margin-top: 15px;
+.empty{
+text-align:center;
+color:#999;
+padding:20px;
 }
 
-input[type="text"],
-input[type="date"],
-input[type="number"] {
-  width: 100%;
-  padding: 13px;
-  border: 1px solid #ddd;
-  border-radius: 12px;
-  font-size: 16px;
-  margin-top: 8px;
-  margin-bottom: 12px;
+nav{
+position:fixed;
+bottom:0;
+left:0;
+right:0;
+height:78px;
+background:rgba(255,255,255,.96);
+border-top:1px solid #ddd;
+display:flex;
+justify-content:space-around;
+align-items:center;
 }
 
-label.form-label {
-  font-size: 14px;
-  color: #666;
+nav button{
+background:none;
+color:#777;
+padding:8px;
+font-size:13px;
 }
 
-nav {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 78px;
-  background: rgba(255,255,255,0.96);
-  border-top: 1px solid #ddd;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
+nav button.active{
+color:#111;
+font-weight:800;
 }
 
-nav button {
-  background: none;
-  color: #777;
-  font-size: 13px;
-  padding: 8px;
+.level{
+display:flex;
+justify-content:space-between;
+align-items:center;
 }
 
-nav button.active {
-  color: #111;
-  font-weight: 800;
+.level-number{
+font-size:30px;
+font-weight:800;
 }
 
-.page {
-  display: none;
-}
-
-.page.active {
-  display: block;
-}
-
-.empty {
-  text-align: center;
-  color: #999;
-  padding: 20px 0;
+.small{
+color:#777;
+font-size:13px;
 }
 </style>
 </head>
@@ -212,82 +202,44 @@ nav button.active {
 <div class="app">
 
 <header>
-  <div class="logo">NEXT</div>
-  <div class="subtitle">昨日の自分を、今日超える。</div>
+<div class="logo">NEXT</div>
+<div class="subtitle">昨日の自分を、今日超える。</div>
 </header>
 
 
 <!-- HOME -->
+
 <main id="home" class="page active">
 
 <div class="card">
 
-  <div class="level">
+<div class="level">
 
-    <div>
-      <div class="exp">CURRENT LEVEL</div>
-      <div class="level-number">
-        LEVEL <span id="level">1</span>
-      </div>
-    </div>
+<div>
+<div class="small">CURRENT LEVEL</div>
+<div class="level-number">
+LEVEL <span id="level">1</span>
+</div>
+</div>
 
-    <div class="exp">
-      <span id="exp">0</span> EXP
-    </div>
+<div class="small">
+<span id="exp">0</span> EXP
+</div>
 
-  </div>
+</div>
 
-  <div class="progress">
-    <div class="progress-bar" id="levelProgress"></div>
-  </div>
+<div class="progress">
+<div class="progress-bar" id="levelBar"></div>
+</div>
 
 </div>
 
 
 <div class="card">
 
-  <h2>🎯 今日の進捗</h2>
+<h2>🎯 現在の目標</h2>
 
-  <div class="progress">
-    <div class="progress-bar" id="dayProgress"></div>
-  </div>
-
-  <p id="progressText">0 / 3 完了</p>
-
-</div>
-
-
-<div class="card">
-
-  <h2>🔥 今日やること</h2>
-
-  <div id="tasks">
-
-    <label class="task">
-      <input type="checkbox" onchange="completeTask(this)">
-      <span>バドミントンを練習する</span>
-    </label>
-
-    <label class="task">
-      <input type="checkbox" onchange="completeTask(this)">
-      <span>勉強を30分する</span>
-    </label>
-
-    <label class="task">
-      <input type="checkbox" onchange="completeTask(this)">
-      <span>AI開発を30分する</span>
-    </label>
-
-  </div>
-
-</div>
-
-
-<div class="card">
-
-  <h2>🏆 目標</h2>
-
-  <div id="homeGoals"></div>
+<div id="homeGoals"></div>
 
 </div>
 
@@ -295,69 +247,65 @@ nav button.active {
 
 
 <!-- GOALS -->
+
 <main id="goals" class="page">
 
 <div class="card">
 
-  <h2>🎯 目標を追加</h2>
+<h2>🎯 新しい目標</h2>
 
-  <label class="form-label">目標名</label>
+<input
+id="goalName"
+type="text"
+placeholder="例：京都TOP16"
+>
 
-  <input
-    type="text"
-    id="goalName"
-    placeholder="例：京都TOP16"
-  >
+<input
+id="goalDate"
+type="date"
+>
 
-  <label class="form-label">期限</label>
-
-  <input
-    type="date"
-    id="goalDate"
-  >
-
-  <label class="form-label">現在の進捗（0〜100）</label>
-
-  <input
-    type="number"
-    id="goalProgress"
-    min="0"
-    max="100"
-    value="0"
-  >
-
-  <button class="add" onclick="addGoal()">
-    ＋ 目標を追加
-  </button>
+<button class="full" onclick="addGoal()">
+＋ 目標を追加
+</button>
 
 </div>
 
 
 <div class="card">
 
-  <h2>📋 あなたの目標</h2>
+<h2>📋 目標一覧</h2>
 
-  <div id="goalList"></div>
+<div id="goalList"></div>
 
 </div>
 
 </main>
 
 
-<!-- TASKS -->
-<main id="taskPage" class="page">
+<!-- TASK -->
+
+<main id="tasks" class="page">
 
 <div class="card">
 
-  <h2>✓ タスク</h2>
+<h2>☀️ 今日やること</h2>
 
-  <p>
-    今日やることを完了するとEXPを獲得できます。
-  </p>
+<p class="small">
+長期目標から今日やる行動を決めよう。
+</p>
 
-  <p>
-    <strong>1タスク = 30 EXP</strong>
-  </p>
+<input
+id="taskInput"
+type="text"
+placeholder="例：フットワーク15分"
+>
+
+<button class="full" onclick="addTask()">
+＋ 今日の行動を追加
+</button>
+
+<div id="taskList"></div>
 
 </div>
 
@@ -365,19 +313,20 @@ nav button.active {
 
 
 <!-- REVIEW -->
+
 <main id="review" class="page">
 
 <div class="card">
 
-  <h2>📝 振り返り</h2>
+<h2>📝 振り返り</h2>
 
-  <p>
-    今日の振り返り機能は次のアップデートで追加します。
-  </p>
+<p>
+この機能は次のアップデートで追加する予定。
+</p>
 
-  <p>
-    「今日できたこと」「課題」「明日やること」を記録できるようにする予定です。
-  </p>
+<p class="small">
+今日できたこと、課題、明日やることを記録できるようにします。
+</p>
 
 </div>
 
@@ -386,19 +335,23 @@ nav button.active {
 
 <nav>
 
-<button id="navHome" class="active" onclick="showPage('home')">
+<button id="navHome" class="active"
+onclick="showPage('home',this)">
 🏠<br>ホーム
 </button>
 
-<button id="navGoals" onclick="showPage('goals')">
+<button id="navGoals"
+onclick="showPage('goals',this)">
 🎯<br>目標
 </button>
 
-<button id="navTasks" onclick="showPage('taskPage')">
-✓<br>タスク
+<button id="navTasks"
+onclick="showPage('tasks',this)">
+☀️<br>今日
 </button>
 
-<button id="navReview" onclick="showPage('review')">
+<button id="navReview"
+onclick="showPage('review',this)">
 📝<br>振り返り
 </button>
 
@@ -409,341 +362,600 @@ nav button.active {
 
 <script>
 
-let exp = Number(localStorage.getItem("nextExp")) || 0;
+let goals=
+JSON.parse(localStorage.getItem("NEXT_goals")||"[]");
 
-let goals =
-  JSON.parse(localStorage.getItem("nextGoals")) || [];
+let tasks=
+JSON.parse(localStorage.getItem("NEXT_tasks")||"[]");
 
-
-function updateLevel() {
-
-  const level =
-    Math.floor(exp / 100) + 1;
-
-  const currentExp =
-    exp % 100;
-
-  document.getElementById("level")
-    .textContent = level;
-
-  document.getElementById("exp")
-    .textContent = exp;
-
-  document.getElementById("levelProgress")
-    .style.width = currentExp + "%";
-
-  localStorage.setItem(
-    "nextExp",
-    exp
-  );
-}
+let exp=
+Number(localStorage.getItem("NEXT_exp")||0);
 
 
-function completeTask(checkbox) {
+function save(){
 
-  const task =
-    checkbox.parentElement;
+localStorage.setItem(
+"NEXT_goals",
+JSON.stringify(goals)
+);
 
-  if (checkbox.checked) {
+localStorage.setItem(
+"NEXT_tasks",
+JSON.stringify(tasks)
+);
 
-    task.classList.add("done");
-
-    exp += 30;
-
-  } else {
-
-    task.classList.remove("done");
-
-    exp = Math.max(0, exp - 30);
-
-  }
-
-  updateLevel();
-
-  updateDayProgress();
+localStorage.setItem(
+"NEXT_exp",
+exp
+);
 
 }
 
 
-function updateDayProgress() {
+function updateLevel(){
 
-  const checkboxes =
-    document.querySelectorAll(
-      "#tasks input[type=checkbox]"
-    );
+let level=
+Math.floor(exp/100)+1;
 
-  const completed =
-    [...checkboxes].filter(
-      checkbox => checkbox.checked
-    ).length;
+let current=
+exp%100;
 
-  const total =
-    checkboxes.length;
+document.getElementById("level")
+.textContent=level;
 
-  const percent =
-    total === 0
-      ? 0
-      : completed / total * 100;
+document.getElementById("exp")
+.textContent=exp;
 
-  document.getElementById(
-    "dayProgress"
-  ).style.width = percent + "%";
-
-  document.getElementById(
-    "progressText"
-  ).textContent =
-    completed + " / " + total + " 完了";
-}
-
-
-function addGoal() {
-
-  const name =
-    document.getElementById("goalName")
-      .value.trim();
-
-  const date =
-    document.getElementById("goalDate")
-      .value;
-
-  let progress =
-    Number(
-      document.getElementById("goalProgress")
-        .value
-    );
-
-  if (!name) {
-
-    alert("目標名を入力してください");
-
-    return;
-
-  }
-
-  progress =
-    Math.min(
-      100,
-      Math.max(0, progress)
-    );
-
-
-  const goal = {
-
-    id: Date.now(),
-
-    name: name,
-
-    date: date,
-
-    progress: progress
-
-  };
-
-
-  goals.push(goal);
-
-  saveGoals();
-
-  renderGoals();
-
-
-  document.getElementById(
-    "goalName"
-  ).value = "";
-
-  document.getElementById(
-    "goalDate"
-  ).value = "";
-
-  document.getElementById(
-    "goalProgress"
-  ).value = 0;
+document.getElementById("levelBar")
+.style.width=current+"%";
 
 }
 
 
-function deleteGoal(id) {
+function addGoal(){
 
-  goals =
-    goals.filter(
-      goal => goal.id !== id
-    );
+let name=
+document.getElementById("goalName")
+.value.trim();
 
-  saveGoals();
+let date=
+document.getElementById("goalDate")
+.value;
 
-  renderGoals();
+if(!name){
+
+alert("目標名を入力してください");
+
+return;
+
+}
+
+let goal={
+
+id:Date.now(),
+
+name:name,
+
+date:date,
+
+progress:0,
+
+month:[],
+
+week:[],
+
+today:[]
+
+};
+
+goals.push(goal);
+
+save();
+
+renderGoals();
+
+document.getElementById("goalName")
+.value="";
+
+document.getElementById("goalDate")
+.value="";
 
 }
 
 
-function saveGoals() {
+function deleteGoal(id){
 
-  localStorage.setItem(
-    "nextGoals",
-    JSON.stringify(goals)
-  );
+goals=
+goals.filter(g=>g.id!==id);
 
-}
+save();
 
-
-function renderGoals() {
-
-  const list =
-    document.getElementById("goalList");
-
-  const home =
-    document.getElementById("homeGoals");
-
-
-  if (goals.length === 0) {
-
-    list.innerHTML =
-      '<div class="empty">まだ目標がありません。</div>';
-
-    home.innerHTML =
-      '<div class="empty">「目標」から追加してみよう。</div>';
-
-    return;
-
-  }
-
-
-  list.innerHTML =
-    goals.map(goal => `
-
-      <div class="goal">
-
-        <div class="goal-name">
-          ${escapeHTML(goal.name)}
-        </div>
-
-        ${
-          goal.date
-          ? `<div class="goal-date">
-              期限：${goal.date}
-             </div>`
-          : ""
-        }
-
-        <div class="goal-percent">
-          進捗 ${goal.progress}%
-        </div>
-
-        <div class="progress">
-
-          <div
-            class="progress-bar"
-            style="width:${goal.progress}%">
-          </div>
-
-        </div>
-
-        <button
-          class="delete"
-          onclick="deleteGoal(${goal.id})">
-          🗑️ 削除
-        </button>
-
-      </div>
-
-    `).join("");
-
-
-  home.innerHTML =
-    goals.map(goal => `
-
-      <div class="goal">
-
-        <div class="goal-name">
-          ${escapeHTML(goal.name)}
-        </div>
-
-        <div class="goal-percent">
-          ${goal.progress}%
-        </div>
-
-        <div class="progress">
-
-          <div
-            class="progress-bar"
-            style="width:${goal.progress}%">
-          </div>
-
-        </div>
-
-      </div>
-
-    `).join("");
+renderGoals();
 
 }
 
 
-function escapeHTML(text) {
+function updateGoalProgress(id,value){
 
-  const div =
-    document.createElement("div");
+let goal=
+goals.find(g=>g.id===id);
 
-  div.textContent = text;
+if(!goal)return;
 
-  return div.innerHTML;
+goal.progress=
+Math.max(0,Math.min(100,Number(value)));
+
+save();
+
+renderGoals();
 
 }
 
 
-function showPage(page) {
+function addChild(id,type){
 
-  document
-    .querySelectorAll(".page")
-    .forEach(
-      element =>
-        element.classList.remove("active")
-    );
+let text=
+prompt(
+type==="month"
+?"今月の目標を入力してください":
+type==="week"
+?"今週の目標を入力してください":
+"今日やることを入力してください"
+);
+
+if(!text)return;
+
+let goal=
+goals.find(g=>g.id===id);
+
+if(!goal)return;
+
+goal[type].push({
+
+id:Date.now(),
+
+text:text,
+
+done:false
+
+});
+
+save();
+
+renderGoals();
+
+}
 
 
-  document
-    .getElementById(page)
-    .classList.add("active");
+function deleteChild(goalId,type,childId){
+
+let goal=
+goals.find(g=>g.id===goalId);
+
+if(!goal)return;
+
+goal[type]=
+goal[type].filter(
+item=>item.id!==childId
+);
+
+save();
+
+renderGoals();
+
+}
 
 
-  document
-    .querySelectorAll("nav button")
-    .forEach(
-      button =>
-        button.classList.remove("active")
-    );
+function toggleChild(goalId,type,childId){
+
+let goal=
+goals.find(g=>g.id===goalId);
+
+if(!goal)return;
+
+let child=
+goal[type].find(
+item=>item.id===childId
+);
+
+if(!child)return;
+
+child.done=!child.done;
+
+if(child.done){
+
+exp+=10;
+
+}else{
+
+exp=Math.max(0,exp-10);
+
+}
+
+save();
+
+updateLevel();
+
+renderGoals();
+
+renderTasks();
+
+}
 
 
-  if (page === "home") {
+function renderGoals(){
 
-    document
-      .getElementById("navHome")
-      .classList.add("active");
+let list=
+document.getElementById("goalList");
 
-  }
+let home=
+document.getElementById("homeGoals");
 
-  if (page === "goals") {
 
-    document
-      .getElementById("navGoals")
-      .classList.add("active");
+if(goals.length===0){
 
-  }
+list.innerHTML=
+'<div class="empty">まだ目標がありません。</div>';
 
-  if (page === "taskPage") {
+home.innerHTML=
+'<div class="empty">「目標」から追加してみよう。</div>';
 
-    document
-      .getElementById("navTasks")
-      .classList.add("active");
+return;
 
-  }
+}
 
-  if (page === "review") {
 
-    document
-      .getElementById("navReview")
-      .classList.add("active");
+list.innerHTML=
+goals.map(goal=>`
 
-  }
+<div class="goal">
+
+<div class="goal-title">
+🎯 ${escapeHTML(goal.name)}
+</div>
+
+${
+goal.date
+?
+`<div class="goal-date">
+期限：${goal.date}
+</div>`
+:""
+}
+
+<div class="goal-progress">
+進捗：${goal.progress}%
+</div>
+
+<input
+type="range"
+min="0"
+max="100"
+value="${goal.progress}"
+oninput="updateGoalProgress(${goal.id},this.value)"
+>
+
+<div class="progress">
+
+<div
+class="progress-bar"
+style="width:${goal.progress}%">
+</div>
+
+</div>
+
+
+<div class="child">
+
+<div class="child-title">
+📅 今月
+</div>
+
+${
+goal.month.map(item=>`
+
+<div style="margin-top:10px">
+
+<input
+type="checkbox"
+${item.done?"checked":""}
+onchange="toggleChild(${goal.id},'month',${item.id})"
+>
+
+${escapeHTML(item.text)}
+
+<button
+class="danger"
+onclick="deleteChild(${goal.id},'month',${item.id})">
+削除
+</button>
+
+</div>
+
+`).join("")
+}
+
+<button
+class="secondary"
+style="margin-top:10px"
+onclick="addChild(${goal.id},'month')">
+＋ 今月の目標
+</button>
+
+</div>
+
+
+<div class="child">
+
+<div class="child-title">
+📆 今週
+</div>
+
+${
+goal.week.map(item=>`
+
+<div style="margin-top:10px">
+
+<input
+type="checkbox"
+${item.done?"checked":""}
+onchange="toggleChild(${goal.id},'week',${item.id})"
+>
+
+${escapeHTML(item.text)}
+
+<button
+class="danger"
+onclick="deleteChild(${goal.id},'week',${item.id})">
+削除
+</button>
+
+</div>
+
+`).join("")
+}
+
+<button
+class="secondary"
+style="margin-top:10px"
+onclick="addChild(${goal.id},'week')">
+＋ 今週の目標
+</button>
+
+</div>
+
+
+<div class="child">
+
+<div class="child-title">
+☀️ 今日
+</div>
+
+${
+goal.today.map(item=>`
+
+<div style="margin-top:10px">
+
+<input
+type="checkbox"
+${item.done?"checked":""}
+onchange="toggleChild(${goal.id},'today',${item.id})"
+>
+
+${escapeHTML(item.text)}
+
+<button
+class="danger"
+onclick="deleteChild(${goal.id},'today',${item.id})">
+削除
+</button>
+
+</div>
+
+`).join("")
+}
+
+<button
+class="secondary"
+style="margin-top:10px"
+onclick="addChild(${goal.id},'today')">
+＋ 今日の行動
+</button>
+
+</div>
+
+
+<button
+class="danger"
+onclick="deleteGoal(${goal.id})">
+🗑️ 目標を削除
+</button>
+
+</div>
+
+`).join("");
+
+
+home.innerHTML=
+goals.map(goal=>`
+
+<div class="goal">
+
+<div class="goal-title">
+🎯 ${escapeHTML(goal.name)}
+</div>
+
+<div class="small">
+進捗 ${goal.progress}%
+</div>
+
+<div class="progress">
+
+<div
+class="progress-bar"
+style="width:${goal.progress}%">
+</div>
+
+</div>
+
+</div>
+
+`).join("");
+
+}
+
+
+function addTask(){
+
+let input=
+document.getElementById("taskInput");
+
+let text=
+input.value.trim();
+
+if(!text)return;
+
+tasks.push({
+
+id:Date.now(),
+
+text:text,
+
+done:false
+
+});
+
+input.value="";
+
+save();
+
+renderTasks();
+
+}
+
+
+function toggleTask(id){
+
+let task=
+tasks.find(t=>t.id===id);
+
+if(!task)return;
+
+task.done=!task.done;
+
+if(task.done){
+
+exp+=30;
+
+}else{
+
+exp=Math.max(0,exp-30);
+
+}
+
+save();
+
+updateLevel();
+
+renderTasks();
+
+}
+
+
+function deleteTask(id){
+
+tasks=
+tasks.filter(t=>t.id!==id);
+
+save();
+
+renderTasks();
+
+}
+
+
+function renderTasks(){
+
+let list=
+document.getElementById("taskList");
+
+if(tasks.length===0){
+
+list.innerHTML=
+'<div class="empty">今日の行動はありません。</div>';
+
+return;
+
+}
+
+list.innerHTML=
+tasks.map(task=>`
+
+<div style="
+padding:14px 0;
+border-bottom:1px solid #eee;
+">
+
+<input
+type="checkbox"
+${task.done?"checked":""}
+onchange="toggleTask(${task.id})"
+>
+
+<span style="
+${task.done
+?"text-decoration:line-through;color:#999;"
+:""}
+">
+
+${escapeHTML(task.text)}
+
+</span>
+
+<button
+class="danger"
+onclick="deleteTask(${task.id})">
+削除
+</button>
+
+</div>
+
+`).join("");
+
+}
+
+
+function escapeHTML(text){
+
+let div=
+document.createElement("div");
+
+div.textContent=text;
+
+return div.innerHTML;
+
+}
+
+
+function showPage(page,button){
+
+document
+.querySelectorAll(".page")
+.forEach(
+p=>p.classList.remove("active")
+);
+
+document
+.getElementById(page)
+.classList.add("active");
+
+document
+.querySelectorAll("nav button")
+.forEach(
+b=>b.classList.remove("active")
+);
+
+button.classList.add("active");
 
 }
 
@@ -752,7 +964,7 @@ updateLevel();
 
 renderGoals();
 
-updateDayProgress();
+renderTasks();
 
 </script>
 
