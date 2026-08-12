@@ -1012,15 +1012,61 @@ ${goal.name}
       throw new Error("AIとの通信に失敗しました");
     }
 
-    const data = await response.json();
+    const reader = response.body.getReader();
+    const decoder = new TextDecoder("utf-8");
 
-    plan.innerHTML =
-      "<div class='child'>" +
-      "<div class='child-title'>🤖 AIコーチからの提案</div>" +
-      "<p>" +
-      escapeHTML(data.response || data.result || JSON.stringify(data)) +
-      "</p>" +
-      "</div>";
+    let text = "";
+
+    while (true) {
+
+      const { value, done } = await reader.read();
+
+      if (done) break;
+
+      const chunk = decoder.decode(value, {
+        stream: true
+      });
+
+      const lines = chunk.split("\n");
+
+      for (const line of lines) {
+
+        if (!line.startsWith("data:")) {
+          continue;
+        }
+
+        const data = line.slice(5).trim();
+
+        if (!data || data === "[DONE]") {
+          continue;
+        }
+
+        try {
+
+          const parsed = JSON.parse(data);
+
+          if (parsed.response) {
+            text += parsed.response;
+          }
+
+          if (parsed.text) {
+            text += parsed.text;
+          }
+
+        } catch (e) {
+          // JSONではないデータは無視
+        }
+
+      }
+
+      plan.innerHTML =
+        "<div class='child'>" +
+        "<div class='child-title'>🤖 AIコーチからの提案</div>" +
+        "<p>" +
+        escapeHTML(text).replace(/\n/g, "<br>") +
+        "</p>" +
+        "</div>";
+    }
 
   } catch (error) {
 
