@@ -312,7 +312,36 @@ placeholder="例：フットワーク15分"
 </main>
 
 
-<!-- REVIEW -->
+<!-- AI COACH -->
+
+<main id="aiCoach" class="page">
+
+<div class="card">
+
+<h2>🤖 AIコーチ</h2>
+
+<p class="small">
+あなたの目標から、次にやるべきことを整理します。
+</p>
+
+<button class="full" onclick="createPlan()">
+✨ 計画を作る
+</button>
+
+</div>
+
+
+<div class="card" id="aiResult" style="display:none;">
+
+<h2>📋 今週のプラン</h2>
+
+<div id="planText"></div>
+
+</div>
+
+</main>
+  
+  <!-- REVIEW -->
 
 <main id="review" class="page">
 
@@ -353,6 +382,11 @@ onclick="showPage('tasks',this)">
 <button id="navReview"
 onclick="showPage('review',this)">
 📝<br>振り返り
+</button>
+
+<button id="navAI"
+onclick="showPage('aiCoach',this)">
+🤖<br>AI
 </button>
 
 </nav>
@@ -925,7 +959,65 @@ onclick="deleteTask(${task.id})">
 }
 
 
-function escapeHTML(text){
+function createPlan(){
+
+  if(goals.length === 0){
+
+    alert("まず「目標」から目標を登録してください。");
+
+    return;
+
+  }
+
+  const goal = goals[0];
+
+  const result =
+    document.getElementById("aiResult");
+
+  const plan =
+    document.getElementById("planText");
+
+  result.style.display = "block";
+
+  plan.innerHTML = `
+
+    <div class="child">
+
+      <div class="child-title">
+        🎯 ${escapeHTML(goal.name)}
+      </div>
+
+      <p>
+        この目標を達成するための行動を整理しました。
+      </p>
+
+      <p><strong>📅 今月</strong></p>
+
+      <ul>
+        <li>目標達成に必要な能力を1つ決める</li>
+        <li>その能力を伸ばす練習・勉強を続ける</li>
+      </ul>
+
+      <p><strong>📆 今週</strong></p>
+
+      <ul>
+        <li>重点課題に取り組む日を3日作る</li>
+        <li>自分の課題を1つ記録する</li>
+      </ul>
+
+      <p><strong>☀️ 今日</strong></p>
+
+      <ul>
+        <li>目標につながる行動を30分行う</li>
+        <li>終わったらNEXTに記録する</li>
+      </ul>
+
+    </div>
+
+  `;
+
+}
+  function escapeHTML(text){
 
 let div=
 document.createElement("div");
@@ -967,6 +1059,33 @@ renderGoals();
 renderTasks();
 
 </script>
+
+<!-- AI COACH -->
+<div id="aiCoach" class="page">
+
+  <div class="card">
+
+    <h2>🤖 AIコーチ</h2>
+
+    <p class="small">
+      あなたの目標から、次にやるべきことを整理します。
+    </p>
+
+    <button class="full" onclick="createPlan()">
+      ✨ 計画を作る
+    </button>
+
+  </div>
+
+  <div class="card" id="aiResult" style="display:none;">
+
+    <h2>📋 今週のプラン</h2>
+
+    <div id="planText"></div>
+
+  </div>
+
+</div>
 
 </body>
 </html>
