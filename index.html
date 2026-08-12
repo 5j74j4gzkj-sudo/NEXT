@@ -980,17 +980,14 @@ async function createPlan() {
       "https://llm-chat-app-template.5j74j4gzkj.workers.dev/",
       {
         method: "POST",
-
         headers: {
           "Content-Type": "application/json"
         },
-
         body: JSON.stringify({
           messages: [
             {
               role: "user",
-              content:
-                `あなたはNEXTのAIコーチです。
+              content: `あなたはNEXTのAIコーチです。
 
 ユーザーの目標：
 ${goal.name}
@@ -1027,37 +1024,7 @@ ${goal.name}
         stream: true
       });
 
-      const lines = chunk.split("\n");
-
-      for (const line of lines) {
-
-        if (!line.startsWith("data:")) {
-          continue;
-        }
-
-        const data = line.slice(5).trim();
-
-        if (!data || data === "[DONE]") {
-          continue;
-        }
-
-        try {
-
-          const parsed = JSON.parse(data);
-
-          if (parsed.response) {
-            text += parsed.response;
-          }
-
-          if (parsed.text) {
-            text += parsed.text;
-          }
-
-        } catch (e) {
-          // JSONではないデータは無視
-        }
-
-      }
+      text += chunk;
 
       plan.innerHTML =
         "<div class='child'>" +
