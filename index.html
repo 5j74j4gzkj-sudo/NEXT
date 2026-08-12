@@ -959,62 +959,77 @@ onclick="deleteTask(${task.id})">
 }
 
 
-function createPlan(){
+async function createPlan() {
 
-  if(goals.length === 0){
-
+  if (goals.length === 0) {
     alert("まず「目標」から目標を登録してください。");
-
     return;
-
   }
 
   const goal = goals[0];
 
-  const result =
-    document.getElementById("aiResult");
-
-  const plan =
-    document.getElementById("planText");
+  const result = document.getElementById("aiResult");
+  const plan = document.getElementById("planText");
 
   result.style.display = "block";
+  plan.innerHTML = "🤖 AIが計画を考えています…";
 
-  plan.innerHTML = `
+  try {
 
-    <div class="child">
+    const response = await fetch(
+      "https://llm-chat-app-template.5j74j4gzkj.workers.dev/",
+      {
+        method: "POST",
 
-      <div class="child-title">
-        🎯 ${escapeHTML(goal.name)}
-      </div>
+        headers: {
+          "Content-Type": "application/json"
+        },
 
-      <p>
-        この目標を達成するための行動を整理しました。
-      </p>
+        body: JSON.stringify({
+          messages: [
+            {
+              role: "user",
+              content:
+                `あなたはNEXTのAIコーチです。
 
-      <p><strong>📅 今月</strong></p>
+ユーザーの目標：
+${goal.name}
 
-      <ul>
-        <li>目標達成に必要な能力を1つ決める</li>
-        <li>その能力を伸ばす練習・勉強を続ける</li>
-      </ul>
+この目標を達成するために、
+今月・今週・今日の3段階で、
+高校生でも実行しやすい具体的な計画を作ってください。
 
-      <p><strong>📆 今週</strong></p>
+特に「今日やること」は3つ以内にしてください。
 
-      <ul>
-        <li>重点課題に取り組む日を3日作る</li>
-        <li>自分の課題を1つ記録する</li>
-      </ul>
+日本語で回答してください。`
+            }
+          ]
+        })
+      }
+    );
 
-      <p><strong>☀️ 今日</strong></p>
+    if (!response.ok) {
+      throw new Error("AIとの通信に失敗しました");
+    }
 
-      <ul>
-        <li>目標につながる行動を30分行う</li>
-        <li>終わったらNEXTに記録する</li>
-      </ul>
+    const data = await response.json();
 
-    </div>
+    plan.innerHTML =
+      "<div class='child'>" +
+      "<div class='child-title'>🤖 AIコーチからの提案</div>" +
+      "<p>" +
+      escapeHTML(data.response || data.result || JSON.stringify(data)) +
+      "</p>" +
+      "</div>";
 
-  `;
+  } catch (error) {
+
+    console.error(error);
+
+    plan.innerHTML =
+      "<p>⚠️ AIとの通信に失敗しました。</p>";
+
+  }
 
 }
   function escapeHTML(text){
